@@ -66,10 +66,26 @@ if (isset($_GET['download']) and $_GET['download'] == 'true') {
 				visibility: hidden;
 				opacity: 0;
 			}
-			.dropdown-menu > li:hover .custom-sub-menu {
+
+			.dropdown-menu>li:hover .custom-sub-menu {
 				visibility: visible;
 				opacity: 1;
+			}
 
+			.dropdown-menu-item {
+				position: relative;
+			}
+
+			.dropdown-menu-item:has(.custom-sub-menu):after {
+				position: absolute;				
+				content: "";
+				border-right: 2px solid #444444;
+				border-bottom: 2px solid #444444;
+				top: 50%;
+				right: 5px;
+				width: 10px;
+				height: 10px;
+				transform: rotate(-45deg) translateY(-50%);
 			}
 
 			/* my custom styles end */
@@ -120,11 +136,11 @@ if (isset($_GET['download']) and $_GET['download'] == 'true') {
 								aria-expanded="false">Категорії <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<?php foreach ($categories as $categorie): ?>
-									<li><a href="#"><?= $categorie ?></a>
+									<li class="dropdown-menu-item"><a href="#"><?= $categorie ?></a>
 										<?php if ($categorie === 'Комп`ютери'): ?>
 											<ul class="dropdown-menu custom-sub-menu ">
 												<?php foreach ($sub_categories as $sub_category): ?>
-													<li><a href="#"><?= $sub_category ?></a></li>
+													<li class="dropdown-menu-item"><a href="#"><?= $sub_category ?></a></li>
 												<?php endforeach; ?>
 											</ul>
 										<?php endif; ?>
