@@ -49,14 +49,29 @@ if (isset($_GET['download']) and $_GET['download'] == 'true') {
 			/* basic task styles end */
 
 			/* my custom styles start*/
-			.dropdown.open .caret {           
+			.dropdown.open .caret {
 				transform: rotate(180deg);
 			}
 
 			.dropdown-menu a {
 				overflow: hidden;
-				text-overflow:ellipsis;
+				text-overflow: ellipsis;
 			}
+
+			.custom-sub-menu {
+				position: absolute;
+				top: -3px;
+				left: 185px;
+				display: block;
+				visibility: hidden;
+				opacity: 0;
+			}
+			.dropdown-menu > li:hover .custom-sub-menu {
+				visibility: visible;
+				opacity: 1;
+
+			}
+
 			/* my custom styles end */
 		</style>
 	</head>
@@ -105,8 +120,16 @@ if (isset($_GET['download']) and $_GET['download'] == 'true') {
 								aria-expanded="false">Категорії <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<?php foreach ($categories as $categorie): ?>
-									<li><a href="#"><?= $categorie ?></a></li>
-								<?php endforeach ?>
+									<li><a href="#"><?= $categorie ?></a>
+										<?php if ($categorie === 'Комп`ютери'): ?>
+											<ul class="dropdown-menu custom-sub-menu ">
+												<?php foreach ($sub_categories as $sub_category): ?>
+													<li><a href="#"><?= $sub_category ?></a></li>
+												<?php endforeach; ?>
+											</ul>
+										<?php endif; ?>
+									</li>
+								<?php endforeach; ?>
 							</ul>
 						</li>
 						<li><a href="test20html.php?download=true"><u>Завантажити <b>test20html.php</b></u></a></li>
